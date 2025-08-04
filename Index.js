@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER JINN - Digital Problem Solver</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --text: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --card-bg: #1e293b;
+            --border: #334155;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+        
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            border: 4px solid var(--accent);
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease;
+        }
+        
+        .avatar:hover {
+            transform: scale(1.05);
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+            }
+        }
+        
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: 0.5s;
+        }
+        
+        .age {
+            background: var(--secondary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: 1s;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--secondary);
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            transition: all 0.5s;
+            z-index: -1;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: calc(var(--delay) * 0.2s);
+        }
+        
+        .social-link:hover::before {
+            left: 0;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+            color: white;
+        }
+        
+        .social-link i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-link:hover i {
+            transform: scale(1.2);
+        }
+        
+        .section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: 2s;
+        }
+        
+        .section:hover::before {
+            opacity: 0.1;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: 1.5s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 24px;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: 2s;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid transparent;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            background-clip: padding-box, border-box;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: 2.5s;
+        }
+        
+        .skills-list {
+            list-style: none;
+        }
+        
+        .skills-list li {
+            margin: 15px 0;
+            padding: 12px 20px;
+            background: var(--secondary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skills-list li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            z-index: -1;
+            transition: width 0.5s ease;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: calc(var(--delay) * 0.3s);
+        }
+        
+        .skills-list li:hover::before {
+            width: 100%;
+        }
+        
+        .skills-list li:hover {
+            transform: translateX(10px);
+            color: white;
+        }
+        
+        .skills-list i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        
+        .skills-list li:hover i {
+            transform: scale(1.2) rotate(15deg);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            z-index: -1;
+            transition: left 0.5s ease;
+            animation: gradientShift 4s ease infinite;
+        }
+        
+        .contact-item:hover::before {
+            left: 0;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+        }
+        
+        .contact-item i {
+            color: transparent;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: 3s;
+            width: 40px;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        .contact-item a {
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: 3.5s;
+        }
+        
+        .contact-item a:hover {
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+            margin-top: 50px;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            animation-delay: 4s;
+        }
+        
+        .typing-animation {
+            border-right: 2px solid transparent;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa, #ec4899, #f59e0b, #8b5cf6);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite, typing 3.5s steps(40) infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            display: inline-block;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2rem;
+            }
+            
+            .section {
+                margin: 20px 10px;
+                padding: 20px;
+            }
+            
+            .about-text {
+                font-size: 1rem;
+                padding: 15px;
+            }
+            
+            .skills-list li {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="profile">
+                <div class="avatar">
+                    <img src="https://i.ibb.co/QjC5dLXH/profile.jpg" alt="CYBER JINN">
+                </div>
+                <h1 class="name">CYBER JINN</h1>
+                <p class="title"><span class="typing-animation">Digital Problem Solver</span></p>
+                <div class="age">25 Years</div>
+                
+                <div class="social-links">
+                    <a href="mailto:cyberjinnser@gmail.com" class="social-link" style="--delay: 1">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                    <a href="https://wa.me/919074133825" target="_blank" class="social-link" style="--delay: 2">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://t.me/mursh_x7" target="_blank" class="social-link" style="--delay: 3">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="https://instagram.com/mb_jinn_ser.ofc" target="_blank" class="social-link" style="--delay: 4">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="https://www.threads.net/@mb_jinn_ser.ofc" target="_blank" class="social-link" style="--delay: 5">
+                        <i class="fab fa-thread"></i> Threads
+                    </a>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-brain"></i> About Me
+                </h2>
+                <blockquote class="about-text">
+                    I'm CYBER JINN — a digital problem solver with deep roots in tech. From building bots to securing servers, I live and breathe code and cybersecurity. Always learning. Always evolving.
+                </blockquote>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-tools"></i> Skills & Services
+                </h2>
+                <ul class="skills-list">
+                    <li style="--delay: 1">
+                        <i class="fas fa-robot"></i>
+                        <span>Telegram Bot Development</span>
+                    </li>
+                    <li style="--delay: 2">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Ethical Hacking / Pentesting</span>
+                    </li>
+                    <li style="--delay: 3">
+                        <i class="fas fa-plug"></i>
+                        <span>API Integration</span>
+                    </li>
+                    <li style="--delay: 4">
+                        <i class="fas fa-cloud"></i>
+                        <span>Server Setup & Cloud Automation</span>
+                    </li>
+                    <li style="--delay: 5">
+                        <i class="fas fa-search"></i>
+                        <span>Digital Forensics / Cybersecurity Guidance</span>
+                    </li>
+                </ul>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:cyberjinnser@gmail.com">cyberjinnser@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <a href="https://wa.me/919074133825">+91 90741 33825</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-telegram"></i>
+                        <a href="https://t.me/mursh_x7">@mursh_x7</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <a href="https://instagram.com/mb_jinn_ser.ofc">@mb_jinn_ser.ofc</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-thread"></i>
+                        <a href="https://www.threads.net/@mb_jinn_ser.ofc">@mb_jinn_ser.ofc</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>© 2023 CYBER JINN | Digital Security & Automation Specialist</p>
+            <p>Always learning. Always evolving.</p>
+        </footer>
+    </div>
+</body>
+</html>
